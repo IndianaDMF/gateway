@@ -1,5 +1,6 @@
 ﻿using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
+using Amazon.Runtime.Internal.Auth;
 using System;
 
 namespace Aws.System
@@ -13,8 +14,8 @@ namespace Aws.System
             AWSCredentials awsCredentials;
             chain.TryGetAWSCredentials(profile.Name, out awsCredentials);
             return awsCredentials;
-        }
-    }
+        }        
+    }    
 
     public class Profile
     {

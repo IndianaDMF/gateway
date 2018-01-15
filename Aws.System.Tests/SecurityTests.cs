@@ -11,7 +11,7 @@ namespace aws_api_gateway
         public void Can_Get_Credentials_From_Credential_File()
         {
             var security = new Security();
-            var profile = DefaultAwsProfile.Get();
+            var profile = DefaultAwsProfile.GetProfile();
             var credentials = security.GetAwsCredentials(profile);
             Assert.IsNotNull(credentials);
         }
