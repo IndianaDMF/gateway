@@ -31,9 +31,9 @@ namespace Aws.System
             restsharpRequest.AddHeader("Authorization", signature.ForAuthorizationHeader);
         }
 
-        private GatewayRequestSettings GetGatewayApiRequest(IRestRequest request)
+        private GatewayRequest GetGatewayApiRequest(IRestRequest request)
         {
-            GatewayRequestSettings req = new GatewayRequestSettings(GetPublicRequest(request), Constants.AwsServiceName);
+            GatewayRequest req = new GatewayRequest(GetPublicRequest(request), Constants.AwsServiceName);
 
             return req;
         }
@@ -45,9 +45,9 @@ namespace Aws.System
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        private AwsApiGatewayRequestSettings GetPublicRequest(IRestRequest request)
+        private AwsApiGatewayRequest GetPublicRequest(IRestRequest request)
         {
-            var publicRequest = new AwsApiGatewayRequestSettings();
+            var publicRequest = new AwsApiGatewayRequest();
             publicRequest.HttpMethod = request.Method.ToString();
             publicRequest.ResourcePath = request.Resource;
             

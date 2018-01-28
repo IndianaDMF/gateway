@@ -10,9 +10,9 @@ using System.IO;
 
 namespace Aws.System
 {
-    internal class GatewayRequestSettings : IRequest
+    internal class GatewayRequest : IRequest
     {
-        private AwsApiGatewayRequestSettings publicRequest;
+        private AwsApiGatewayRequest publicRequest;
         private bool useQueryString;
 
         public string RequestName { get; set; }
@@ -40,7 +40,7 @@ namespace Aws.System
         public IDictionary<string, string> Parameters { get; private set; }
         public IDictionary<string, string> SubResources { get; private set; }
 
-        public GatewayRequestSettings(AwsApiGatewayRequestSettings publicRequest, string awsServiceName)
+        public GatewayRequest(AwsApiGatewayRequest publicRequest, string awsServiceName)
         {
             this.publicRequest = publicRequest ?? throw new ArgumentNullException(nameof(publicRequest));
             if (string.IsNullOrEmpty(awsServiceName)) throw new ArgumentNullException(nameof(awsServiceName));

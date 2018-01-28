@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Aws.System
 {
-    internal partial class AwsApiGatewayRequestSettings : AmazonAPIGatewayRequest
+    internal partial class AwsApiGatewayRequest : AmazonAPIGatewayRequest
     {
         public string ResourcePath { get; internal set; }
 
@@ -18,21 +18,21 @@ namespace Aws.System
         public Uri Endpoint { get; internal set; }
         public bool UseQueryString { get; internal set; }
         public IDictionary<string, string> Parameters { get; internal set; }
-        public AwsApiGatewayRequestSettings()
+        public AwsApiGatewayRequest()
         {
             this.Parameters = new Dictionary<string, string>();
             this.Headers = new Dictionary<string, string>();
         }
     }
 
-    internal partial class AwsApiGatewayRequestMarshaller : IMarshaller<IRequest, AwsApiGatewayRequestSettings>, IMarshaller<IRequest, AmazonWebServiceRequest>
+    internal partial class AwsApiGatewayRequestMarshaller : IMarshaller<IRequest, AwsApiGatewayRequest>, IMarshaller<IRequest, AmazonWebServiceRequest>
     {
         public IRequest Marshall(AmazonWebServiceRequest input)
         {
-            return Marshall((AwsApiGatewayRequestSettings)input);
+            return Marshall((AwsApiGatewayRequest)input);
         }
 
-        public IRequest Marshall(AwsApiGatewayRequestSettings publicRequest)
+        public IRequest Marshall(AwsApiGatewayRequest publicRequest)
         {
             IRequest request = new DefaultRequest(publicRequest, Constants.AwsServiceName);
             request.HttpMethod = publicRequest.HttpMethod;
