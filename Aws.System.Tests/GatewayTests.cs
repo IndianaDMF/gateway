@@ -12,7 +12,7 @@ namespace Aws.System.Tests
     [TestClass]
     public class GatewayTests
     {
-        private readonly string uri = "https://412ebgbtudt1.execute-api.us-east-2.amazonaws.com";
+        private readonly string uri = "https://412ebgbtud.execute-api.us-east-2.amazonaws.com";
         private readonly string resource = "/UAT/api/v1/Quote";              
 
        
@@ -48,9 +48,9 @@ namespace Aws.System.Tests
             RestRequest request = new RestRequest();
             request.Method = Method.POST;
             request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("X-QuoteService-Auth", "YourMom");            
+            request.AddHeader("X-QuoteService-Auth", "AuthFLA");            
             request.Resource = resource;
-            request.AddBody(new
+            var body = new QuoteRequest()
             {
                 DateOfBirth = "2/29/1960",
                 FaceAmount = 150000,
@@ -58,7 +58,9 @@ namespace Aws.System.Tests
                 PolicyLength = "10",
                 Smoker = false,
                 State = "WA"
-            });
+            };
+
+            request.AddBody(body);
 
             return request;
         }
@@ -70,5 +72,20 @@ namespace Aws.System.Tests
                 Authenticator = new AwsIamAuthenticator(DefaultAwsProfile.GetRunTimeCredentials(), RegionEndpoint.USEast2)
             };
         }
+    }
+
+    public class QuoteRequest
+    {
+        public string DateOfBirth { get; set; }
+
+        public int FaceAmount { get; set; }
+
+        public string Gender { get; set; }
+
+        public string PolicyLength { get; set; }
+
+        public bool Smoker { get; set; }
+
+        public string State { get; set; }
     }
 }

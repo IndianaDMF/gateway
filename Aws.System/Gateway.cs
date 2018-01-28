@@ -20,6 +20,7 @@ namespace Aws.System
         {
             var requestMetrics = new RequestMetrics();
             AWS4Signer signer = new AWS4Signer(true);
+            //AWS4Signer.InitializeHeaders()
             return signer.SignRequest(request, config, requestMetrics, creds.AccessKey, creds.SecretKey);            
         }   
     }
@@ -32,7 +33,7 @@ namespace Aws.System
     /// <summary>
     /// Container for the parameters to the InvokeRestRequest operation.
     /// </summary>
-    public partial class InvokeRestRequest : AmazonAPIGatewayRequest
+    public partial class AwsApiRestRequest : AmazonAPIGatewayRequest
     {
         public string ResourcePath { get; internal set; }
 
@@ -43,19 +44,24 @@ namespace Aws.System
         public Uri Endpoint { get; internal set; }
         public bool UseQueryString { get; internal set; }
         public IDictionary<string, string> Parameters { get; internal set; }
+        public AwsApiRestRequest()
+        {
+            this.Parameters = new Dictionary<string, string>();
+            this.Headers = new Dictionary<string, string>();
+        }
     }
 
-    public partial class InvokeRestRequestMarshaller : IMarshaller<IRequest, InvokeRestRequest>, IMarshaller<IRequest, AmazonWebServiceRequest>
+    public partial class AwsApiRestRequestMarshaller : IMarshaller<IRequest, AwsApiRestRequest>, IMarshaller<IRequest, AmazonWebServiceRequest>
     {
         public IRequest Marshall(AmazonWebServiceRequest input)
         {
-            return this.Marshall((InvokeRestRequest)input);
+            return Marshall((AwsApiRestRequest)input);
         }
 
-        public IRequest Marshall(InvokeRestRequest publicRequest)
-        {
+        public IRequest Marshall(AwsApiRestRequest publicRequest)
+        {           
             IRequest request = new DefaultRequest(publicRequest, Constants.AwsServiceName);
-            request.HttpMethod = publicRequest.HttpMethod; 
+            request.HttpMethod = publicRequest.HttpMethod;            
             foreach(var header in publicRequest.Headers)
             {
                 request.Headers.Add(header.Key, header.Value);

@@ -41,13 +41,12 @@ namespace Aws.System
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        private InvokeRestRequest GetPublicRequest(IRestRequest request)
+        private AwsApiRestRequest GetPublicRequest(IRestRequest request)
         {
-            var publicRequest = new InvokeRestRequest();
+            var publicRequest = new AwsApiRestRequest();            
             publicRequest.HttpMethod = request.Method.ToString();
             publicRequest.ResourcePath = request.Resource;
-
-            //headers
+            
             foreach (var parameter in request.Parameters)
             {
                 switch (parameter.Type)
