@@ -25,4 +25,11 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\..\aws-sdk-net\sdk\src\Core\bin\Debug\netstandard1.3\AWSSDK.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
 </Project>

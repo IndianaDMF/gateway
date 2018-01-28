@@ -1,7 +1,5 @@
 ﻿using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
-using Amazon.Runtime.Internal.Auth;
-using System;
 
 namespace Aws.System
 {

@@ -13,9 +13,7 @@ namespace Aws.System.Tests
     public class GatewayTests
     {
         private readonly string uri = "https://412ebgbtud.execute-api.us-east-2.amazonaws.com";
-        private readonly string resource = "/UAT/api/v1/Quote";              
-
-       
+        private readonly string resource = "/UAT/api/v1/Quote"; 
         
         [TestMethod]
         public void Can_Call_Quote_Api_Service_With_WebRequest()
@@ -69,7 +67,7 @@ namespace Aws.System.Tests
         {
             return new RestClient(uri)
             {
-                Authenticator = new AwsIamAuthenticator(DefaultAwsProfile.GetRunTimeCredentials(), RegionEndpoint.USEast2)
+                Authenticator = new IamAuthenticator(DefaultAwsProfile.GetRunTimeCredentials(), RegionEndpoint.USEast2)
             };
         }
     }

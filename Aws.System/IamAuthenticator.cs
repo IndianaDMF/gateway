@@ -1,17 +1,16 @@
 ﻿using Amazon;
 using Amazon.APIGateway;
 using Amazon.Runtime;
-using Amazon.Runtime.Internal;
 using RestSharp;
 using RestSharp.Authenticators;
 
 namespace Aws.System
 {
-    public class AwsIamAuthenticator : IAuthenticator
+    public class IamAuthenticator : IAuthenticator
     {
         private readonly AWSCredentials _AWSCredentials;
         private readonly RegionEndpoint _RegionEndpoint;
-        public AwsIamAuthenticator(AWSCredentials awsCredentials, RegionEndpoint region)
+        public IamAuthenticator(AWSCredentials awsCredentials, RegionEndpoint region)
         {
             _AWSCredentials = awsCredentials;
             _RegionEndpoint = region;
@@ -24,16 +23,21 @@ namespace Aws.System
         /// <param name="restsharpRequest"></param>
         public void Authenticate(IRestClient restsharpClient, IRestRequest restsharpRequest)
         {
-            var gateway = new Gateway();
+            var gateway = new GatewayClient();
             var config = new AmazonAPIGatewayConfig();
-            config.RegionEndpoint = _RegionEndpoint;
-
-            var publicRequest = GetPublicRequest(restsharpRequest);
-            var azRequest = new DefaultRequest(publicRequest, Constants.AwsServiceName);
-
-            var sign = gateway.SignRequest(azRequest, config, _AWSCredentials.GetCredentials());
-            restsharpRequest.AddHeader("Authorization", sign.ForAuthorizationHeader);
+            config.RegionEndpoint = _RegionEndpoint;            
+            var request = GetGatewayApiRequest(restsharpRequest);
+            var signature = gateway.SignRequest(request, config, _AWSCredentials.GetCredentials());
+            restsharpRequest.AddHeader("Authorization", signature.ForAuthorizationHeader);
         }
+
+        private GatewayRequestSettings GetGatewayApiRequest(IRestRequest request)
+        {
+            GatewayRequestSettings req = new GatewayRequestSettings(GetPublicRequest(request), Constants.AwsServiceName);
+
+            return req;
+        }
+
 
         /// <summary>
         /// takes the request info from RestSharp and maps to
@@ -41,9 +45,9 @@ namespace Aws.System
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        private AwsApiRestRequest GetPublicRequest(IRestRequest request)
+        private AwsApiGatewayRequestSettings GetPublicRequest(IRestRequest request)
         {
-            var publicRequest = new AwsApiRestRequest();            
+            var publicRequest = new AwsApiGatewayRequestSettings();
             publicRequest.HttpMethod = request.Method.ToString();
             publicRequest.ResourcePath = request.Resource;
             

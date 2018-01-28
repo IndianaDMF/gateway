@@ -5,10 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.APIGateway" Version="3.3.16" />
-    <PackageReference Include="AWSSDK.Core" Version="3.3.21.6" />
-    <PackageReference Include="RestSharp" Version="105.0.0" />
+    <Compile Remove="Gateway.cs" />
+    <Compile Remove="IamAuthenticatorOld.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.0.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AWSSDK.APIGateway">
+      <HintPath>..\..\aws-sdk-net\sdk\src\Services\APIGateway\bin\Debug\netstandard1.3\AWSSDK.APIGateway.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\..\aws-sdk-net\sdk\src\Core\bin\Debug\netstandard1.3\AWSSDK.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
