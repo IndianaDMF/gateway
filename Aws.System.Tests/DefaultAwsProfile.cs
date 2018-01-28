@@ -7,7 +7,7 @@ namespace Aws.System.Tests
 {
     public class DefaultAwsProfile
     {
-        internal static Profile GetProfile() => new Profile() { Path = "e:\\awsuser\\.aws\\credentials", Name = "default" };
+        internal static Profile GetProfile() => new Profile() { Path = "c:\\.aws\\credentials", Name = "default" };
 
         internal static AWSCredentials GetRunTimeCredentials()
         {
