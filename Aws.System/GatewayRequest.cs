@@ -48,12 +48,13 @@ namespace Aws.System
             ServiceName = awsServiceName;
             OriginalRequest = publicRequest;
             RequestName = OriginalRequest.GetType().Name;
-            UseSigV4 = ((IAmazonWebServiceRequest)OriginalRequest).UseSigV4;
+            UseSigV4 = publicRequest.UseSig4;
             Headers = publicRequest.Headers;
             Endpoint = publicRequest.Endpoint;
-
+            ResourcePath = publicRequest.ResourcePath;
+            HttpMethod = publicRequest.HttpMethod;
             ParameterCollection = new ParameterCollection();            
-        }
+        }        
 
         public void AddHeaders(string key, string value)
         {

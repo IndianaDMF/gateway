@@ -1,11 +1,7 @@
 ﻿using Amazon;
-using Amazon.Runtime.Internal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 
 namespace Aws.System.Tests
 {

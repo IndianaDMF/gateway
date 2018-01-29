@@ -18,6 +18,8 @@ namespace Aws.System
         public Uri Endpoint { get; internal set; }
         public bool UseQueryString { get; internal set; }
         public IDictionary<string, string> Parameters { get; internal set; }
+        public bool UseSig4 { get; internal set; }
+
         public AwsApiGatewayRequest()
         {
             Parameters = new Dictionary<string, string>();
@@ -48,7 +50,7 @@ namespace Aws.System
 
             request.ResourcePath = publicRequest.ResourcePath;
             request.UseQueryString = true;
-
+            request.UseSigV4 = publicRequest.UseSig4;
 
             return request;
         }

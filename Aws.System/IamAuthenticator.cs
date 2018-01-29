@@ -3,7 +3,6 @@ using Amazon.APIGateway;
 using Amazon.Runtime;
 using RestSharp;
 using RestSharp.Authenticators;
-using System;
 
 namespace Aws.System
 {
@@ -26,19 +25,16 @@ namespace Aws.System
         /// <param name="restsharpRequest"></param>
         public void Authenticate(IRestClient restsharpClient, IRestRequest restsharpRequest)
         {
-            var config = new AmazonAPIGatewayConfig();
-            config.RegionEndpoint = _RegionEndpoint;            
+            var config = new AmazonAPIGatewayConfig() { RegionEndpoint = _RegionEndpoint };            
             var request = GetGatewayApiRequest(restsharpRequest, restsharpClient);
+
             var signature = GatewayClient.SignRequest(request, config, _AWSCredentials.GetCredentials());
             restsharpRequest.AddHeader(AuthorizationHeader, signature.ForAuthorizationHeader);
         }
 
         private GatewayRequest GetGatewayApiRequest(IRestRequest restsharpRequest, IRestClient restsharpClient)
         {
-            GatewayRequest req = 
-                new GatewayRequest(GetPublicRequest(restsharpRequest, restsharpClient), Constants.AwsServiceName);
-
-            return req;
+            return new GatewayRequest(GetPublicRequest(restsharpRequest, restsharpClient), Constants.AwsServiceName);            
         }        
 
         /// <summary>
@@ -68,6 +64,7 @@ namespace Aws.System
             }
 
             publicRequest.Endpoint = client.BaseUrl;
+            publicRequest.UseSig4 = true;
             
             return publicRequest;
         }
