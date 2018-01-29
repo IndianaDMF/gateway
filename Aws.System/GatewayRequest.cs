@@ -50,6 +50,9 @@ namespace Aws.System
             RequestName = OriginalRequest.GetType().Name;
             UseSigV4 = ((IAmazonWebServiceRequest)OriginalRequest).UseSigV4;
             Headers = publicRequest.Headers;
+            Endpoint = publicRequest.Endpoint;
+
+            ParameterCollection = new ParameterCollection();            
         }
 
         public void AddHeaders(string key, string value)

@@ -7,7 +7,7 @@ namespace Aws.System
 {
     public class GatewayClient
     {
-        public AWS4SigningResult SignRequest(IRequest request, IClientConfig config, ImmutableCredentials creds)
+        public static AWS4SigningResult SignRequest(IRequest request, IClientConfig config, ImmutableCredentials creds)
         {
             var requestMetrics = new RequestMetrics();
             AWS4Signer signer = new AWS4Signer(true);

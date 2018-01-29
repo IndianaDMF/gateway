@@ -20,8 +20,8 @@ namespace Aws.System
         public IDictionary<string, string> Parameters { get; internal set; }
         public AwsApiGatewayRequest()
         {
-            this.Parameters = new Dictionary<string, string>();
-            this.Headers = new Dictionary<string, string>();
+            Parameters = new Dictionary<string, string>();
+            Headers = new Dictionary<string, string>();
         }
     }
 
