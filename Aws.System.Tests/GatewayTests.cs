@@ -9,7 +9,8 @@ namespace Aws.System.Tests
     public class GatewayTests
     {
         private readonly string uri = "https://412ebgbtud.execute-api.us-east-2.amazonaws.com";
-        private readonly string resource = "/UAT/api/v1/Quote"; 
+        private readonly string quoteResource = "/UAT/api/v1/Quote";
+        private readonly string healthResource = "/UAT/api/health/status";
         
         [TestMethod]
         public void Can_Call_Quote_Api_Service_With_WebRequest()
@@ -33,7 +34,7 @@ namespace Aws.System.Tests
         {
             RestRequest request = new RestRequest();
             request.Method = Method.GET;                        
-            request.Resource = "/UAT/api/health/status"; 
+            request.Resource = healthResource; 
             return request;
         }
 
@@ -43,7 +44,7 @@ namespace Aws.System.Tests
             request.Method = Method.POST;
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("X-QuoteService-Auth", "AuthFLA");            
-            request.Resource = resource;
+            request.Resource = quoteResource;
             var body = new QuoteRequest()
             {
                 DateOfBirth = "2/29/1960",

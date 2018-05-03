@@ -11,6 +11,7 @@ namespace Aws.System
         private readonly AWSCredentials _AWSCredentials;
         private readonly RegionEndpoint _RegionEndpoint;
         public const string AuthorizationHeader = "Authorization";
+        public const string AmazonDateHeader = "X-Amz-Date";
 
         public IamAuthenticator(AWSCredentials awsCredentials, RegionEndpoint region)
         {
@@ -30,11 +31,16 @@ namespace Aws.System
 
             var signature = GatewayClient.SignRequest(request, config, _AWSCredentials.GetCredentials());
             restsharpRequest.AddHeader(AuthorizationHeader, signature.ForAuthorizationHeader);
+            restsharpRequest.AddHeader(AmazonDateHeader, signature.ISO8601DateTime);
+            restsharpRequest.AddHeader("Content-Type", "application/json");
         }
 
         private GatewayRequest GetGatewayApiRequest(IRestRequest restsharpRequest, IRestClient restsharpClient)
         {
-            return new GatewayRequest(GetPublicRequest(restsharpRequest, restsharpClient), Constants.AwsServiceName);            
+            var gw = new GatewayRequest(GetPublicRequest(restsharpRequest, restsharpClient), Constants.AwsServiceName);
+            gw.AuthenticationRegion = _RegionEndpoint.SystemName;
+            gw.ServiceName = "execute-api";
+            return gw;
         }        
 
         /// <summary>
