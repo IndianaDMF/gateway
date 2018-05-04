@@ -26,20 +26,25 @@ namespace Aws.System
         /// <param name="restsharpRequest"></param>
         public void Authenticate(IRestClient restsharpClient, IRestRequest restsharpRequest)
         {
-            var config = new AmazonAPIGatewayConfig() { RegionEndpoint = _RegionEndpoint };            
+            var config = new AmazonAPIGatewayConfig()
+            {
+                RegionEndpoint = _RegionEndpoint,
+                AuthenticationRegion = RegionEndpoint.USEast1.SystemName, // IAM Auth is regionless so uses USEast1 by default
+                AuthenticationServiceName = Constants.AwsInvokeApi
+            };
+            
             var request = GetGatewayApiRequest(restsharpRequest, restsharpClient);
 
             var signature = GatewayClient.SignRequest(request, config, _AWSCredentials.GetCredentials());
             restsharpRequest.AddHeader(AuthorizationHeader, signature.ForAuthorizationHeader);
-            restsharpRequest.AddHeader(AmazonDateHeader, signature.ISO8601DateTime);
-            restsharpRequest.AddHeader("Content-Type", "application/json");
+            restsharpRequest.AddHeader(AmazonDateHeader, signature.ISO8601DateTime);            
         }
 
         private GatewayRequest GetGatewayApiRequest(IRestRequest restsharpRequest, IRestClient restsharpClient)
         {
             var gw = new GatewayRequest(GetPublicRequest(restsharpRequest, restsharpClient), Constants.AwsServiceName);
-            gw.AuthenticationRegion = _RegionEndpoint.SystemName;
-            gw.ServiceName = "execute-api";
+            gw.AuthenticationRegion = RegionEndpoint.USEast1.SystemName;            
+            //gw.ServiceName = Constants.AwsServiceName;
             return gw;
         }        
 

@@ -53,6 +53,8 @@ namespace Aws.System
             Endpoint = publicRequest.Endpoint;
             ResourcePath = publicRequest.ResourcePath;
             HttpMethod = publicRequest.HttpMethod;
+            AuthenticationRegion = RegionEndpoint.USEast1.SystemName;
+            
             ParameterCollection = new ParameterCollection();            
         }        
 

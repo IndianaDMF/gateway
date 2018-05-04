@@ -34,7 +34,8 @@ namespace Aws.System.Tests
         {
             RestRequest request = new RestRequest();
             request.Method = Method.GET;                        
-            request.Resource = healthResource; 
+            request.Resource = healthResource;
+            request.AddHeader("Content-Type", "application/json");
             return request;
         }
 
