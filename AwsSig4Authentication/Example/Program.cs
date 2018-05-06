@@ -8,9 +8,12 @@ namespace Example
     {
         static void Main(string[] args)
         {
-            string url = "https://420wtf.execute-api.us-east-2.amazonaws.com"; // replace with your url
+            string url = "https://420.execute-api.us-east-2.amazonaws.com"; // replace with your url
             string resource = "/"; // replace with your resource path
-            var jsonBody = new { }; // replace with your content
+            var jsonBody = new
+            {
+               // your content
+            }; 
 
             ServiceClient service = new ServiceClient();
             var client = service.GetClient(url);
@@ -18,6 +21,7 @@ namespace Example
 
             request.Method = Method.POST;
             request.Resource = resource;
+            //request.AddHeader("xYourHeader", "");
             request.AddJsonBody(jsonBody);
 
             var response = client.Execute(request);

@@ -19,6 +19,7 @@ namespace AwsSig4Authentication
         private const string DateTimeFormat = "yyyyMMddTHHmmssZ";
         private const string DateFormat = "yyyyMMdd";
         private const string AwsRequest = "aws4_request";
+        private const string AwsVersion = "AWS4";
 
         internal string RequestMethod { get; private set; }
         internal string Host { get; private set; }
@@ -104,11 +105,11 @@ namespace AwsSig4Authentication
 
         private byte[] GetSignatureKey(string secretKey, string dateStamp, string regionName, string serviceName)
         {
-            var kBytes = ("AWS4" + secretKey).ToBytes();
+            var kBytes = (AwsVersion + secretKey).ToBytes();
             var kDate = HmacSha256(dateStamp, kBytes);
             var kRegion = HmacSha256(regionName, kDate);
             var kService = HmacSha256(serviceName, kRegion);
-            return HmacSha256("aws4_request", kService);
+            return HmacSha256(AwsRequest, kService);
         }
 
         private string GetHashedCanonicalRequest(string content)
