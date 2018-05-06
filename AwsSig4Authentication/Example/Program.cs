@@ -1,10 +1,6 @@
 ﻿using AwsSig4Authentication;
 using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Example
 {
@@ -12,12 +8,12 @@ namespace Example
     {
         static void Main(string[] args)
         {
-            string uri = "";
-            string resource = "";
-            var jsonBody = new { };
+            string url = "https://420wtf.execute-api.us-east-2.amazonaws.com"; // replace with your url
+            string resource = "/"; // replace with your resource path
+            var jsonBody = new { }; // replace with your content
 
             ServiceClient service = new ServiceClient();
-            var client = service.GetClient(uri);
+            var client = service.GetClient(url);
             var request = service.GetRequest();
 
             request.Method = Method.POST;
@@ -37,16 +33,16 @@ namespace Example
             return request;
         }
 
-        public RestClient GetClient(string uri)
+        public RestClient GetClient(string baseUrl)
         {
             var credentials = new AwsApiKey()
             {
-                AccessKey = "",
-                SecretKey = "",
-                Region = ""
+                AccessKey = "", // fill in your IAM API Token Access Key
+                SecretKey = "", // fill in your IAM API Token Secret Key
+                Region = "" // fill in your service region
             };
 
-            return new RestClient(uri)
+            return new RestClient(baseUrl)
             {
                 Authenticator = new Sig4Authenticator(credentials)
             };
