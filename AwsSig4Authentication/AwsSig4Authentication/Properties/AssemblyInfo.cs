@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AwsSig4Authentication")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("RestSharp Custom Authenticator for Aws Signature 4")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Dustin Faulk")]
 [assembly: AssemblyProduct("AwsSig4Authentication")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

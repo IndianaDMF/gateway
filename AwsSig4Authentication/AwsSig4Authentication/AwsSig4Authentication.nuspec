@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/IndianaDMF/gateway</licenseUrl>
+    <projectUrl>https://github.com/IndianaDMF/gateway</projectUrl>
+    <iconUrl>https://github.com/IndianaDMF/gateway</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release handling only POSTs</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>AwsSigV4 RestSharp</tags>
+  </metadata>
+</package>
