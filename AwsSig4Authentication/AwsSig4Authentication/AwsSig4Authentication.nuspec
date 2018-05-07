@@ -2,17 +2,20 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>1.0.0.1</version>
     <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <authors>Dustin Faulk</authors>
+    <owners>Dustin Faulk</owners>
     <licenseUrl>https://github.com/IndianaDMF/gateway</licenseUrl>
     <projectUrl>https://github.com/IndianaDMF/gateway</projectUrl>
     <iconUrl>https://github.com/IndianaDMF/gateway</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>Initial release handling only POSTs</releaseNotes>
+    <description>RestSharp Custom Authenticator for Aws Sig 4 authentication</description>
+    <releaseNotes>strongly signed the assembly</releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>AwsSigV4 RestSharp</tags>
+    <tags>Aws ApiGateway SigV4 RestSharp</tags>
+    <dependencies>
+      <dependency id="RestSharp" version="105.2.3"></dependency>
+    </dependencies>
   </metadata>
 </package>
