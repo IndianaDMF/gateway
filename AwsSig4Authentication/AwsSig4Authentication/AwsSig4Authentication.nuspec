@@ -11,11 +11,11 @@
     <iconUrl>https://github.com/IndianaDMF/gateway</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>RestSharp Custom Authenticator for Aws Sig 4 authentication</description>
-    <releaseNotes>strongly signed the assembly</releaseNotes>
+    <releaseNotes>Switched to strongly assigned assemblies</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>Aws ApiGateway SigV4 RestSharp</tags>
     <dependencies>
-      <dependency id="RestSharp" version="105.2.3"></dependency>
+      <dependency id="RestSharpSigned" version="105.2.3"></dependency>
     </dependencies>
   </metadata>
 </package>
